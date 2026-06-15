@@ -7,7 +7,7 @@ NotPetya is a cyber-weapong used by the Russian government in 2017 which was lau
 
 2. Attribution           
 
-NotPetya was created and deployed by Sandworm, a.k.a APT44, Telebots, Voodoo Bear etc., an APT (Advanced Persistent Group) and cyberwarfare unit of the GRU (Russia's military intelligence service). They are known not only for the NotPetya attack, but also for others such as the Ukraine Power Grid Hacks in 2015, 2016 and 2022, the 2018 Winter Olympics disruption and others.
+NotPetya was created and deployed by Sandworm, a.k.a APT44, Telebots, Voodoo Bear etc., an APT (Advanced Persistent Threat) and cyberwarfare unit of the GRU (Russia's military intelligence service). They are known not only for the NotPetya attack, but also for others such as the Ukraine Power Grid Hacks in 2015, 2016 and 2022, the 2018 Winter Olympics disruption and others.
 
 3. Impact & Scope          ← $10B, affected companies, Ukraine + global
 
