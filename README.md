@@ -21,4 +21,13 @@ NotPetya was created and deployed by Sandworm, a.k.a APT44, Telebots, Voodoo Bea
 
 
 
-6. Sources & References    ← your ESET, CISA, Microsoft, Mandiant links
+6. Sources & References    
+
+https://www.youtube.com/watch?v=3-MSlNVqzYY
+https://cyber-peace.org/wp-content/uploads/2018/10/The-Untold-Story-of-NotPetya-the-Most-Devastating-Cyberattack-in-History-_-WIRED.pdf
+https://www.crowdstrike.com/en-us/blog/petrwrap-ransomware-technical-analysis-triple-threat-file-encryption-mft-encryption-credential-theft/
+https://medium.com/@RocketMeUpCybersecurity/the-cyber-kill-chain-analyzing-and-disrupting-attack-phases-87f045e774b4
+https://www.youtube.com/watch?v=LFo2PtQlL1Y
+https://socprime.com/blog/petya-a-notpetya-is-an-ai-powered-cyber-weapon-ttps-lead-to-sandworm-apt-group/
+https://en.wikipedia.org/wiki/Sandworm_(hacker_group)
+https://www.cisa.gov/news-events/alerts/2017/07/01/petya-ransomware
