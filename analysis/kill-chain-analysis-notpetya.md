@@ -37,6 +37,7 @@ Delivery is the phase where the attacker delivers the weaponised malware via dif
 ## 4. Exploitation - What vulnerabilities and mechanisms were triggered ? 
 
 **What is this phase**
+The exploitation phase takes place when the malicious payload is successfully delivered, taking advantage of a potential vulnerability and allowing the attacker to gain access to the system, officially making it compromised. It is the entry point of the attacker, and not much can be done after this phase, but to mitigate further damage.
 
 **What happened in the context of NotPetya**
 
@@ -47,6 +48,7 @@ Delivery is the phase where the attacker delivers the weaponised malware via dif
 ## 5. Installation - How did the malware establish itself on the system ? 
 
 **What is this phase**
+This attacker's aim in this phase is to gain **Persistence**. They have already penetrated the system and now they have to make their presence persistence via different ways so that they do not lose this access. This can be done via **Trojan Malware**, which would allow the attacker remote access to the system, while disguising itself as legitimate software. Another way would be to use a **Rootkit**, a piece of malware that would give the attacker administrative access, while hiding malicious activities from detection.
 
 **What happened in the context of NotPetya**
 
@@ -57,6 +59,7 @@ Delivery is the phase where the attacker delivers the weaponised malware via dif
 ## 6. Command and Control - How did the attacker communicate with the infected machines ? 
 
 **What is this phase**
+By this phase, the attacker would already have persistence over multiple systems within the compromised company, and now they will attempt to build a channel, between their C2 server, to the systems, as a way of communicating with them; sending commands instructing the malware what to do and at the same time, receiving data, such as compromised user credentials and other sensitive information. This is the second phase in which further **Persistence** is built up, making sure that even after reboots and updates, the attacker will still have a way of accessing the target.
 
 **What happened in the context of NotPetya**
 
@@ -67,6 +70,7 @@ Delivery is the phase where the attacker delivers the weaponised malware via dif
 ## 7. Actions on Objectives - What was the end goal ? What have they achieved in the end ?
 
 **What is this phase**
+This is the final phase of the cyber kill chain. This is where the attacker would make their final move, executing their malicious plan to the end. The final objective(s) could be varied and include things such as data exfiltration, permanent destruction of data or even further later movement to other systems. The actual reason for these actions include: financial gain, espionage or simply sabotage.
 
 **What happened in the context of NotPetya**
 
