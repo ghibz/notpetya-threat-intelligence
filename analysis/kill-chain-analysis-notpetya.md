@@ -1,21 +1,23 @@
 # Cyber Kill Chain *NotPetya*
 
-## 1. Reconaissance - What has the attacker researched beforehand ?
+## 1. Reconnaissance - What has the attacker researched beforehand ?
 
 **What is this phase**
-The initial phase in which the attacker gathers intelligence on the victim/target. This is extremely important as it can lead to identifying key vulnerabilities which can later be exploited. There are mainly two types of reconaissance; the first one being **Passive Reconaissance** in which the attacker gathers data without directly interacting with the system, e.g publicly available data such as social media pages, websites, databases. The other type is **Active Reconaissance** where the attacker tests the ground directly on the system, through Network Scanning (nmap) or Web Vulnerabilities (outdated software or SQL injection points).
+The initial phase in which the attacker gathers intelligence on the victim/target. This is extremely important as it can lead to identifying key vulnerabilities which can later be exploited. There are mainly two types of reconnaissance; the first one being **Passive Reconnaissance** in which the attacker gathers data without directly interacting with the system, e.g publicly available data such as social media pages, websites, databases. The other type is **Active Reconnaissance** where the attacker tests the ground directly on the system, through Network Scanning (nmap) or Web Vulnerabilities (outdated software or SQL injection points).
 
 **What happened in the context of NotPetya**
+The **Reconnaissance** phase in the context of NotPetya is probably the least descriptive phase in terms of available information that we have. This is because **Sandworm**, the group responsible for this is part of the GRU, a cyberwarfare unit of Russia's military intelligence service, making their tracks very hard to detect. What we know however, is that **Sandworm** had been very active in the hacking of Ukraine's power grids, making it obvious that they have had **Long-term Strategic Recon** over the landscape and infrastructure of Ukraine's institutions. 
+
+There is however, more information regarding NotPetya which we can place in the Reconnaissance phase, and that is, the **Operational Recon in M.E.Doc**. Once **Sandworm** had infiltrated **Linkos Group** servers (the developers of M.E.Doc), they had several weeks of studying the victim's networks, mapping the systems and accounts they would target as well as identifying SCCM/AD (System Center Configuration Manager, now known as Microsoft Endpoint Configuration Manager, and Active Directory) credentials, which would later be used in the following phases.
 
 **Tools/Techniques used**
 
 **Detection Opportunity (What could have been done)**
 
-
 ## 2. Weaponisation - What malicious weapon have they built ? 
 
 **What is this phase**
-In this phase, the attackers start to develop the malicious payload, based on the vulnerabilities identified in the **Reconaissance** phase. The most common sub-steps in this phase include the actual **Malware Development** in which the malware is tailored based on the victim environment, leveraging existing exploits. The next step is **Payload Delivery** in which the attackers decide the means in which the payload will be delivered into the target systems, which can be either email attachments, links or removeable media (USB).
+In this phase, the attackers start to develop the malicious payload, based on the vulnerabilities identified in the **Reconnaissance** phase. The most common sub-steps in this phase include the actual **Malware Development** in which the malware is tailored based on the victim environment, leveraging existing exploits. The next step is **Payload Delivery** in which the attackers decide the means in which the payload will be delivered into the target systems, which can be either email attachments, links or removable media (USB).
 
 **What happened in the context of NotPetya**
 
@@ -26,7 +28,7 @@ In this phase, the attackers start to develop the malicious payload, based on th
 ## 3. Delivery - How did the payload reach the target ? 
 
 **What is this phase**
-Delivery is the phase where the attacker delivers the weaponised malware via different ways. Some include; **Phishing Emails** with malicious attachments which trick the company employee into downloading it or providing their user credentials; **Malicious Links**, which are URLs designed to lead the victim onto compromised websites and/or drive-by downloads of malware; and lastly, **Removeable Media**, such as USBs where the weaponised payload it planted onto these, and then plugged into the victim's system physical by either the attacker or more commonly an employee (either knowingly or unknowingly).
+Delivery is the phase where the attacker delivers the weaponised malware via different ways. Some include; **Phishing Emails** with malicious attachments which trick the company employee into downloading it or providing their user credentials; **Malicious Links**, which are URLs designed to lead the victim onto compromised websites and/or drive-by downloads of malware; and lastly, **Removeable Media**, such as USBs where the weaponised payload it planted onto these, and then plugged into the victim's system physically by either the attacker or more commonly an employee (either knowingly or unknowingly).
 
 **What happened in the context of NotPetya**
 
