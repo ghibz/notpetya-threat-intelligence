@@ -36,7 +36,7 @@ The **Delivery** of NotPetya was quite genius of **Sandworm**; with most deliver
 
 ### **Tools/Techniques used**
 
-**Detection Opportunity (What could have been done)**
+### **Detection Opportunity (What could have been done)**
 
 ## 4. Exploitation - What vulnerabilities and mechanisms were triggered ? 
 
