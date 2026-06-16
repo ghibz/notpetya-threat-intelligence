@@ -31,3 +31,7 @@ https://www.youtube.com/watch?v=LFo2PtQlL1Y
 https://socprime.com/blog/petya-a-notpetya-is-an-ai-powered-cyber-weapon-ttps-lead-to-sandworm-apt-group/
 https://en.wikipedia.org/wiki/Sandworm_(hacker_group)
 https://www.cisa.gov/news-events/alerts/2017/07/01/petya-ransomware
+https://en.wikipedia.org/wiki/EternalBlue
+https://www.malwarebytes.com/glossary/eternalromance
+https://www.varonis.com/blog/what-is-mimikatz
+
