@@ -32,6 +32,7 @@ In the **Weaponisation** phase of NotPetya, **Sandworm** engineered a single pay
 Delivery is the phase where the attacker delivers the weaponised malware via different ways. Some include; **Phishing Emails** with malicious attachments which trick the company employee into downloading it or providing their user credentials; **Malicious Links**, which are URLs designed to lead the victim onto compromised websites and/or drive-by downloads of malware; and lastly, **Removeable Media**, such as USBs where the weaponised payload it planted onto these, and then plugged into the victim's system physically by either the attacker or more commonly an employee (either knowingly or unknowingly).
 
 **What happened in the context of NotPetya**
+The **Delivery** of NotPetya was quite genius of **Sandworm**; with most delivery methods of payload being malicious links or emails, or removable media and Trojan horses, **Sandworm** thought of a better way of making sure the payload reached their targets, and that is the M.E.Doc software, the leading Ukrainian accounting and finances software, a must in every company on at least one device, used to report taxes and manage invoices. With months before deploying NotPetya (believed to be in April), the hacking organization gained unauthorized access into **Linkos Group's** update servers, the developers responsible for M.E.Doc. They have managed to do this with stolen credentials from one of their employees, via what is believed to be a phishing email. Once inside the update servers, they managed to install a **backdoor** in the software package, with multiple injection attempts in the M.E.Doc updates. On June 27, once the final update took place on these devices, the malware rapidly propagated itself onto each company's network in ways that will be explained in later phases.
 
 **Tools/Techniques used**
 
@@ -43,6 +44,12 @@ Delivery is the phase where the attacker delivers the weaponised malware via dif
 The exploitation phase takes place when the malicious payload is successfully delivered, taking advantage of a potential vulnerability and allowing the attacker to gain access to the system, officially making it compromised. It is the entry point of the attacker, and not much can be done after this phase, but to mitigate further damage.
 
 **What happened in the context of NotPetya**
+While only two true exploits (with known CVEs) have been used in this attack, there are also some other techniques worth mentioning.
+
+1. EternalBlue (CVE-2017-0144) - exploit developed by **U.S National Security Agency (NSA)**, leaked on the Internet by hacking group known as **Shadow Brokers**. It is based on a zero-day vulnerability in the SMBv1 (Server Message Block) protocol, where a buffer overflow exploit is used to control what is sitting at specific memory locations, so when the kernel calls a function pointer, instead of legitimate code, it runs an **attacker-supplied shellcode** (with kernel-level permissions) allowing **arbitrary code execution**.
+2. EternalRomance (CVE-2017-0145) - exploit developed by the same **NSA** and also leaked by **Shadow Brokers**, at the same time as **EternalBlue**. Very similarly, it also an arbitrary code execution exploit aimed at a vulnerability in SMBv1, however different in deployment. **EternalRomance** uses an exploit called **DoublePulsar**, a persistent backdoor that takes advantage of the SMB flaw to download the malware from a remote location and then allocates an internal and a public IP address to connect to the target via port 445 and deliver the payload.
+
+It is worth noting that **NotPetya** had both of these exploits in this code, each one acting as a backup in case the other one did not succeed. The main difference between these two is that **EternalBlue** is a buffer overflow exploit, whereas **EternalRomance** is a type confusing vulnerability which leads to arbitrary code execution.
 
 **Tools/Techniques used**
 
