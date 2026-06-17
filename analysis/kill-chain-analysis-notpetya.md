@@ -16,6 +16,7 @@ There is however, more information regarding NotPetya which we can place in the 
 * Network / Infrastructure mapping/reconnaissance of Linkos Group's update servers
 
 ### **Detection Opportunity (What could have been done)**
+The precise method in which **Sandworm** had gained access into Linkos Group's update server is not publicly mentioned, however, we can assume some plausible vectors such as: phishing, credential theft, etc. Some defensive measures for this type of hijack could be multi-factor authentication on all accounts with administrative access, user training sessions aimed at phishing and network segmentation, keeping the update servers separated from the normal corporate ones.
 
 ## 2. Weaponisation - What malicious weapon have they built ? 
 
@@ -34,6 +35,7 @@ In the **Weaponisation** phase of NotPetya, **Sandworm** engineered a single pay
 * Development of fake ransomware screen for misdirection
 
 ### **Detection Opportunity (What could have been done)**
+Since this phase occurs exclusively on the attacker's end, there are no logs or files which can be detected in advance so that companies can act upon them. However, there are still some way organisations can reduce their exposure to professionaly crafted payloads such as NotPetya's, such as **application whitelisting**, a process in which only pre-approved applications by the administrator can be ran, regardless of whether they are considered malicious or not; and also an **EDR (Endpoint Protection and Response** which would flag low level actions such as MFT/MBR encryption attempts.
 
 ## 3. Delivery - How did the payload reach the target ? 
 
@@ -49,6 +51,11 @@ The **Delivery** of NotPetya was quite genius of **Sandworm**; with most deliver
 * Backdoor module
 
 ### **Detection Opportunity (What could have been done)**
+In this phase, both detection and prevention would have been possible in both Linkos Group, as well as the targeted companies (such as Maersk):
+
+Linkos Group: Integrity checks on the updates servers, which could have flagged unauthorised modifications to the updates packages before they were pushed out. Network Segmentation between the update servers and corporate servers would have made it significantly harder for the attacking group to maintain long-term access.
+
+Maersk (just one example): As mentioned previously, application whitelisting could have prevented the newly updated M.E.Doc from running. Network Monitoring for unusualy outbound traffic after a software update (very usual IoC (Indicator of Compromise))
 
 ## 4. Exploitation - What vulnerabilities and mechanisms were triggered ? 
 
@@ -71,6 +78,7 @@ Lastly, the **Mimikatz** exploit (discovered and showcased for research purposes
 * Mimikatz
 
 ### **Detection Opportunity (What could have been done)**
+Unlike the other phases up until now, the **Exploitation** phase shows clear gaps in companies' security updates. Months before NotPetya was deployed, Microsoft released a security patch (MS17-010), covering EternalBlue and EternalRomance. Beyond this patching, simply disabling SMBv1, which was rarely needed at that time for networks would have removed this vulnerable surface completely. As for Mimikatz, things such as Credential Guard or LSA Protection would have stopped **Sandworm's** means of credential harvesting and further allowing NotPetya to propagate.
 
 ## 5. Installation - How did the malware establish itself on the system ? 
 
@@ -78,15 +86,16 @@ Lastly, the **Mimikatz** exploit (discovered and showcased for research purposes
 This attacker's aim in this phase is to gain **Persistence**. They have already penetrated the system and now they have to make their presence persistence via different ways so that they do not lose this access. This can be done via **Trojan Malware**, which would allow the attacker remote access to the system, while disguising itself as legitimate software. Another way would be to use a **Rootkit**, a piece of malware that would give the attacker administrative access, while hiding malicious activities from detection.
 
 ### **What happened in the context of NotPetya**
-Onto the **Installation** phase for NotPetya, it uses multiple invasive techniques to propagate itself into other devices. First of all it takes advantages of **PsExe**, a legitimate Microsoft Sysinternal tool, usually used by system administrators to remotely access machines and copy small executables onto them. **PsExe** was used by **Sandworm** in a malicious manner, with the administrator credentials gathered by **Mimikatz** to further deploy **NotPetya** into other devices across the network. In the case of **PsExe** not functioning as a way for NotPetya to extend, **WMIC** was used as a second option for lateral movement. **WMIC** is also a legitimate Windows tool, which can also be used to remotely copy files to other systems, and the similarly to **PsExe**, it was used with stolen credentials from **Mimikatz**. What is genius about this propagation approach from **Sandworm** is that both of these tools are completely legitimate and they were not flagged by any anti-malware/virus.
+Onto the **Installation** phase for NotPetya, it uses multiple invasive techniques to propagate itself into other devices. First of all it takes advantages of **PsExec**, a legitimate Microsoft Sysinternal tool, usually used by system administrators to remotely access machines and copy small executables onto them. **PsExec** was used by **Sandworm** in a malicious manner, with the administrator credentials gathered by **Mimikatz** to further deploy **NotPetya** into other devices across the network. In the case of **PsExec** not functioning as a way for NotPetya to extend, **WMIC** was used as a second option for lateral movement. **WMIC** is also a legitimate Windows tool, which can also be used to remotely copy files to other systems, and the similarly to **PsExec**, it was used with stolen credentials from **Mimikatz**. What is genius about this propagation approach from **Sandworm** is that both of these tools are completely legitimate and they were not flagged by any anti-malware/virus.
 
 ### **Tools/Techniques used**
-* PsExe
+* PsExec
 * WMIC
 * Windows Task Scheduler (for reboot)
 * MBR overwrite
 
 ### **Detection Opportunity (What could have been done)**
+Because PsExe and WMIC are legitimate Windows administration tools, things such as anti-malware (signature-based) would have no effect. However, a SIEM (System Information and Event Manager) tool might have flagged unusual amounts of remote process executions in a potential short period of time and possibly in outside business hours. However, the most exploited part of this stage was the reutilization of the same stolen administration credentials, across multiple system, and in this case credential hygiene such as tiered administration model, which would prevent the same credentials from being used on multiple machines at the same time would have diminuated the damage.
 
 ## 6. Command and Control - How did the attacker communicate with the infected machines ? 
 
@@ -100,6 +109,7 @@ At first glance, NotPetya appeared to be a ransomware, demanding a payment in re
 * Hardcoded email address for ransom payment (non-functional)
 
 **Detection Opportunity (What could have been done)**
+Since NotPetya ran an almost non-existent C2 infrastructure, conventional detection techniques for ransomware such as egresss traffic monitoring, would have had limited success, purely because there was almost no outgoing traffic being sent.
 
 ## 7. Actions on Objectives - What was the end goal ? What have they achieved in the end ?
 
@@ -113,3 +123,4 @@ As mentioned in previous phase, NotPetya initially pretended to be a ransomware,
 * MBR-based encryption
 
 ### **Detection Opportunity (What could have been done)**
+By this final phase, detection matters less than damage limitation and recovery. The single most important safeguard is a tested backup and disaster recovery strategy, ideally with offline or immutable backups, since MBR/MFT-level encryption renders any backup still reachable on the network equally vulnerable. Maersk's recovery, made possible only because one domain controller in a Ghana office happened to be offline during the attack, illustrates exactly why geographically or logically isolated backups matter. A pre-established incident response runbook for wiper-style attacks, distinct from a typical ransomware playbook, would also have meant isolating infected segments immediately rather than losing time mid-attack realising that paying the ransom would never actually recover any data.
