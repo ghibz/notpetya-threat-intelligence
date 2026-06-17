@@ -11,6 +11,9 @@ The **Reconnaissance** phase in the context of NotPetya is probably the least de
 There is however, more information regarding NotPetya which we can place in the Reconnaissance phase, and that is, the **Operational Recon in M.E.Doc**. Once **Sandworm** had infiltrated **Linkos Group** servers (the developers of M.E.Doc), they had several weeks of studying the victim's networks, mapping the systems and accounts they would target as well as identifying SCCM/AD (System Center Configuration Manager, now known as Microsoft Endpoint Configuration Manager, and Active Directory) credentials, which would later be used in the following phases.
 
 ### **Tools/Techniques used**
+* Passive Reconnaissance (over the previous attacks in Ukraine)
+* Identification of M.E.Doc as highly valuable target
+* Network / Infrastructure mapping/reconnaissance of Linkos Group's update servers
 
 ### **Detection Opportunity (What could have been done)**
 
@@ -23,6 +26,12 @@ In this phase, the attackers start to develop the malicious payload, based on th
 In the **Weaponisation** phase of NotPetya, **Sandworm** engineered a single payload binary, which included already existing exploitation and encryption techniques. This binary included a modified version of **Mimikatz** (Benjamin Delpy; built it for research in Windows security, showcasing its vulnerabilities, later to be maliciously altered and used by **Sandworm**), for credential harvesting, embedded exploit code of EternalBlue (CVE-2017-0144) and EternalRomance (CVE-2017-0145) for later network propagation, and a **'triple threat'** encryption as CrowdStrike calls it, in which AES-128 encryption is used for normal files, MFT (Master File Table) encryption, making the operating system not know where any file is located, and MBR (Master Boot Record) overwrite, where the first sector of the hard drive, telling the computer where to find the OS, was replaced with **Sandoworm's** own version, which would show the popular black/red ransomware message screen. The payload also include calls to Windows administration tools such as PsExec and WMIC (Windows Management Instrumentation Command-line).
 
 ### **Tools/Techniques used**
+* Development of the *ZvitPublishedObjects.dll* backdoor module, into M.E.Doc's *IsNewUpdate* function
+* Integration of EternalBlue and EternalRomance
+* Integration of modified Mimikatz component
+* Integration of AES-128 and MFT encryption
+* Development of MBR-overwriting payload
+* Development of fake ransomware screen for misdirection
 
 ### **Detection Opportunity (What could have been done)**
 
