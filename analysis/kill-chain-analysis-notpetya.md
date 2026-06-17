@@ -44,6 +44,9 @@ Delivery is the phase where the attacker delivers the weaponised malware via dif
 The **Delivery** of NotPetya was quite genius of **Sandworm**; with most delivery methods of payload being malicious links or emails, or removable media and Trojan horses, **Sandworm** thought of a better way of making sure the payload reached their targets, and that is the M.E.Doc software, the leading Ukrainian accounting and finances software, a must in every company on at least one device, used to report taxes and manage invoices. With months before deploying NotPetya (believed to be in April), the hacking organization gained unauthorized access into **Linkos Group's** update servers, the developers responsible for M.E.Doc. They have managed to do this with stolen credentials from one of their employees, via what is believed to be a phishing email. Once inside the update servers, they managed to install a **backdoor** in the software package, with multiple injection attempts in the M.E.Doc updates. On June 27, once the final update took place on these devices, the malware rapidly propagated itself onto each company's network in ways that will be explained in later phases.
 
 ### **Tools/Techniques used**
+* Compromised Linkos Group update server (via stolen credentials)
+* Trojanised M.E.Doc update package (*actual version 10.01.189*)
+* Backdoor module
 
 ### **Detection Opportunity (What could have been done)**
 
@@ -63,6 +66,9 @@ It is worth noting that **NotPetya** had both of these exploits in this code, ea
 Lastly, the **Mimikatz** exploit (discovered and showcased for research purposes) has been used for credential harvesting. It takes advantage of a vulnerability of LSASS (Local Security Authority Subsystem Service), a key component of Windows' authentication process. The vulnerability is that passwords are sometimes stored, even in plaintext in the LSASS memory, and Mimikatz is able to extract it, as well as other information, making it extremely powerful for credential harvesting.
 
 ### **Tools/Techniques used**
+* EternalBlue (CVE-2017-0144)
+* EternalRomance (CVE-2017-0145)
+* Mimikatz
 
 ### **Detection Opportunity (What could have been done)**
 
@@ -75,6 +81,10 @@ This attacker's aim in this phase is to gain **Persistence**. They have already 
 Onto the **Installation** phase for NotPetya, it uses multiple invasive techniques to propagate itself into other devices. First of all it takes advantages of **PsExe**, a legitimate Microsoft Sysinternal tool, usually used by system administrators to remotely access machines and copy small executables onto them. **PsExe** was used by **Sandworm** in a malicious manner, with the administrator credentials gathered by **Mimikatz** to further deploy **NotPetya** into other devices across the network. In the case of **PsExe** not functioning as a way for NotPetya to extend, **WMIC** was used as a second option for lateral movement. **WMIC** is also a legitimate Windows tool, which can also be used to remotely copy files to other systems, and the similarly to **PsExe**, it was used with stolen credentials from **Mimikatz**. What is genius about this propagation approach from **Sandworm** is that both of these tools are completely legitimate and they were not flagged by any anti-malware/virus.
 
 ### **Tools/Techniques used**
+* PsExe
+* WMIC
+* Windows Task Scheduler (for reboot)
+* MBR overwrite
 
 ### **Detection Opportunity (What could have been done)**
 
@@ -87,6 +97,7 @@ By this phase, the attacker would already have persistence over multiple systems
 At first glance, NotPetya appeared to be a ransomware, demanding a payment in return for the encrypted data, however the almost complete absence of C2 infrastructure is evidence for the argument that **'NotPetya is a wiper, not a ransomware'**. A normal ransomware author would require a reliable C2 payment infrastructure, to keep their ransomware profitable, in contrast to NotPetya, which had very minimal C2, allowing researchers to quickly discover its true nature.
 
 ### **Tools/Techniques used**
+* Hardcoded email address for ransom payment (non-functional)
 
 **Detection Opportunity (What could have been done)**
 
@@ -99,5 +110,6 @@ This is the final phase of the cyber kill chain. This is where the attacker woul
 As mentioned in previous phase, NotPetya initially pretended to be a ransomware, so therefore in the eyes of the victim, the reason was financial gain, however after some attempts across Ukraine to pay the ransom, it was quickly discovered that this was just a cover-up for the real motive. Most researchers can agree that the true motive was chaos and destruction, and that NotPetya was simply a cyber-weapon for the ongoing war between Russia and Ukraine, and in the end, NotPetya was extremely successful in this regard, causing damages equal to approximately 10 billion dollars.
 
 ### **Tools/Techniques used**
+* MBR-based encryption
 
 ### **Detection Opportunity (What could have been done)**
